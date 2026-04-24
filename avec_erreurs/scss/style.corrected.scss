@@ -1,0 +1,91 @@
+// ============================================
+// FICHIER SCSS - VERSION CORRIGÉE ✅
+// ============================================
+
+// --- CORRECTION 1 : $ ajouté devant primary-color ---
+$primary-color: #3498db;     // ✅ Était : primary-color: #3498db;
+$secondary-color: #2ecc71;
+$dark-color: #2c3e50;        // ✅ Variable ajoutée (était manquante = Erreur 5)
+$font-size-base: 16px;
+
+// --- CORRECTION 2 : @mixin ajouté ---
+@mixin flex-center {          // ✅ Était : flex-center { ... } (sans @mixin)
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin border-radius($radius) {
+  border-radius: $radius;
+}
+
+// ============================================
+body {
+  font-family: 'Segoe UI', sans-serif;
+  font-size: $font-size-base;
+  margin: 0;
+  padding: 0;
+  background-color: #f5f5f5;
+}
+
+header {
+  background-color: $primary-color;
+  color: white;
+  padding: 20px;
+
+  // --- CORRECTION 3 : @includ → @include ---
+  @include flex-center;      // ✅ Était : @includ flex-center;
+
+  h1 {
+    font-size: 2rem;
+    margin: 0;
+  }
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+
+  .card {
+    background: white;
+    padding: 20px;
+    margin-bottom: 20px;
+    @include border-radius(8px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+
+    h2 {
+      color: $primary-color;
+      font-size: 1.5rem;
+    }  // ✅ CORRECTION 4 : accolade fermante ajoutée pour h2
+  }
+}  // ✅ CORRECTION 4 (suite) : accolades fermantes ajoutées pour .card et .container
+
+// --- CORRECTION 5 : $dark-color défini en haut ---
+footer {
+  background-color: $dark-color;  // ✅ Variable maintenant définie
+  color: white;
+  text-align: center;
+  padding: 20px;
+  margin-top: 40px;
+
+  p {
+    font-size: 0.9rem;
+    color: $secondary-color;
+  }
+}
+
+.btn {
+  display: inline-block;
+  padding: 10px 24px;
+  background-color: $secondary-color;
+  color: white;
+  border: none;
+  @include border-radius(4px);
+  cursor: pointer;
+  font-size: $font-size-base;
+
+  &:hover {
+    background-color: darken($secondary-color, 10%);
+  }
+}

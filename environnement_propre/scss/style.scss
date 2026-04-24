@@ -1,0 +1,163 @@
+// ============================================
+// ENVIRONNEMENT SCSS PROPRE – Phase 2
+// Structure professionnelle avec partials
+// ============================================
+
+// ---------- Variables ----------
+$primary-color: #3498db;
+$secondary-color: #2ecc71;
+$dark-color: #2c3e50;
+$light-color: #ecf0f1;
+$font-size-base: 16px;
+$font-family: 'Segoe UI', Arial, sans-serif;
+$border-radius: 8px;
+$transition: 0.3s ease;
+
+// ---------- Mixins ----------
+@mixin flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin respond-to($breakpoint) {
+  @if $breakpoint == 'mobile' {
+    @media (max-width: 768px) { @content; }
+  } @else if $breakpoint == 'tablet' {
+    @media (max-width: 1024px) { @content; }
+  }
+}
+
+// ---------- Reset ----------
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+// ---------- Base ----------
+body {
+  font-family: $font-family;
+  font-size: $font-size-base;
+  background-color: $light-color;
+  color: $dark-color;
+  line-height: 1.6;
+}
+
+// ---------- Header ----------
+header {
+  background-color: $primary-color;
+  color: white;
+  padding: 20px 40px;
+  @include flex-center;
+
+  h1 {
+    font-size: 2rem;
+    letter-spacing: 1px;
+  }
+}
+
+// ---------- Navigation ----------
+nav {
+  background-color: $dark-color;
+  padding: 12px 40px;
+
+  ul {
+    list-style: none;
+    display: flex;
+    gap: 24px;
+
+    li a {
+      color: white;
+      text-decoration: none;
+      font-size: 0.95rem;
+      transition: color $transition;
+
+      &:hover {
+        color: $secondary-color;
+      }
+    }
+  }
+}
+
+// ---------- Conteneur principal ----------
+.container {
+  max-width: 1200px;
+  margin: 40px auto;
+  padding: 0 20px;
+
+  @include respond-to('mobile') {
+    padding: 0 12px;
+    margin: 20px auto;
+  }
+}
+
+// ---------- Cartes ----------
+.card {
+  background: white;
+  border-radius: $border-radius;
+  padding: 24px;
+  margin-bottom: 24px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  transition: transform $transition, box-shadow $transition;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+  }
+
+  h2 {
+    color: $primary-color;
+    font-size: 1.4rem;
+    margin-bottom: 12px;
+  }
+
+  p {
+    color: lighten($dark-color, 20%);
+    line-height: 1.7;
+  }
+}
+
+// ---------- Boutons ----------
+.btn {
+  display: inline-block;
+  padding: 10px 24px;
+  border-radius: $border-radius / 2;
+  border: none;
+  cursor: pointer;
+  font-size: $font-size-base;
+  transition: background-color $transition;
+  text-decoration: none;
+
+  &--primary {
+    background-color: $primary-color;
+    color: white;
+
+    &:hover {
+      background-color: $dark-color;
+    }
+  }
+
+  &--secondary {
+    background-color: $secondary-color;
+    color: white;
+
+    &:hover {
+      background-color: darken($secondary-color, 8%);
+    }
+  }
+}
+
+// ---------- Footer ----------
+footer {
+  background-color: $dark-color;
+  color: $light-color;
+  text-align: center;
+  padding: 24px;
+  margin-top: 60px;
+
+  p {
+    font-size: 0.9rem;
+    opacity: 0.8;
+  }
+}
